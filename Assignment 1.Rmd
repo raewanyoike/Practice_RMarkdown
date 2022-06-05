@@ -1,0 +1,45 @@
+---
+title: "ANA 515 Assignment 1"
+author: "Racheal_wanyoike"
+date: "6/2/2022"
+output: word_document
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r gun_deaths, include=FALSE}
+url <- "https://raw.githubusercontent.com/fivethirtyeight/guns-data/master/full_data.csv"
+gun_deaths <- read.csv(url)
+str(gun_deaths)
+```
+
+```{r youth,include=FALSE}
+library(tidyverse)
+library(knitr)
+library(bslib)
+youth <- filter(gun_deaths,age <= 65)
+
+```
+
+```{r, include=FALSE}
+summary(youth)
+totalkilled <- nrow(gun_deaths)
+pplekilledolderthan65 <- nrow(gun_deaths)-(nrow(youth))
+```
+
+We have data of about `r totalkilled` individuals killed by guns. Only `r pplekilledolderthan65` are older than 65. The distribution of the remainder is shown below:
+
+
+```{r youth_dist, echo=FALSE}
+youth %>% ggplot(aes(age)) +geom_freqpoly(binwidth = 1)
+```
+
+```{r race-dist, echo=FALSE}
+youth %>% ggplot(aes(fct_infreq(race)%>% fct_rev()))+geom_bar() + coord_flip() + labs(x="Victims race")
+
+```
+
+
