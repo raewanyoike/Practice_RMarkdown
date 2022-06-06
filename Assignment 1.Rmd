@@ -7,7 +7,7 @@ output:
     df_print: paged
   word_document:
     theme:
-      bootwatch: journal
+      bootswatch: journal
 ---
 ```{r, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
